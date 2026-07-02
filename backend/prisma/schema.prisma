@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id               String   @id @default(cuid())
+  name             String
+  whatsapp         String
+  jobStatus        String
+  message          String
+  date             String
+  time             String
+  platform         String   // google_meet | zoom
+  meetingLink      String   @default("")
+  status           String   @default("pending") // pending | confirmed | cancelled | completed
+  whatsappNotified Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Job {
+  id           String    @id @default(cuid())
+  title        String
+  company      String
+  location     String
+  type         String    // full_time | part_time | remote | freelance | internship
+  description  String
+  requirements String[]  @default([])
+  salary       String    @default("")
+  applyLink    String
+  image        String    @default("")
+  isActive     Boolean   @default(true)
+  deadline     DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String
+  content     String
+  coverImage  String   @default("")
+  tags        String[] @default([])
+  isPublished Boolean  @default(false)
+  readTime    Int      @default(5)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Tool {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  category    String   // crm | communication | analytics | productivity | social | other
+  link        String   @default("")
+  icon        String   @default("")
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Profile {
+  id                 String   @id @default(cuid())
+  name               String   @default("لبنى")
+  title              String   @default("خبيرة المبيعات والتطوير المهني")
+  bio                String   @default("")
+  avatar             String   @default("")
+  cvFile             String   @default("")
+  heroTagline        String   @default("تقديم الدعم بالحب")
+  heroSubtitle       String   @default("بناء جسور الثقة مع مجتمع المبيعات")
+  statsClients       Int      @default(0)
+  statsExperience    Int      @default(0)
+  statsCompanies     Int      @default(0)
+  statsSuccessRate   Int      @default(0)
+  previousCompanies  Json     @default("[]")
+  testimonials       Json     @default("[]")
+  socialLinkedin     String   @default("")
+  socialInstagram    String   @default("")
+  socialTwitter      String   @default("")
+  socialWhatsapp     String   @default("")
+  socialFacebook     String   @default("")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model WorkingHour {
+  id         String   @id @default(cuid())
+  dayOfWeek  Int      @unique // 0=Sun ... 6=Sat
+  isActive   Boolean  @default(false)
+  slots      Json     @default("[]") // [{start: "09:00", end: "12:00"}]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
