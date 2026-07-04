@@ -78,7 +78,7 @@ export default function ToolsPreview() {
         <div className="cards-grid-3">
           {tools.map((tool, i) => (
             <motion.div
-              key={tool._id}
+              key={tool._id || `tool-${i}`}
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.08 }}

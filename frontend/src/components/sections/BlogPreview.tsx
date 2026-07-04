@@ -67,7 +67,7 @@ export default function BlogPreview() {
         <div className="cards-grid-3">
           {posts.map((post, i) => (
             <motion.article
-              key={post._id}
+              key={post._id || `post-${i}`}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.1 }}

@@ -3,9 +3,12 @@ import { NextRequest, NextResponse } from 'next/server'
 const locales = ['en', 'ar']
 const defaultLocale = 'en'
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
-  
+
+  // Skip admin routes — they are locale-independent
+  if (pathname.startsWith('/admin')) return NextResponse.next()
+
   // Check if pathname already has a locale
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`

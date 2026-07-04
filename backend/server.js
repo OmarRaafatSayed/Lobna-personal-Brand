@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv')
 
+const path = require('path')
+
 dotenv.config()
 
 const app = express()
@@ -15,6 +17,9 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 
+// Serve uploaded files as static
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+
 // Routes
 app.use('/api/auth',          require('./routes/auth'))
 app.use('/api/bookings',      require('./routes/bookings'))
@@ -23,6 +28,7 @@ app.use('/api/blog',          require('./routes/blog'))
 app.use('/api/tools',         require('./routes/tools'))
 app.use('/api/profile',       require('./routes/profile'))
 app.use('/api/working-hours', require('./routes/workingHours'))
+app.use('/api/upload',        require('./routes/upload'))
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -1,0 +1,5 @@
+# Agent Operational Constraints
+- DO NOT read multiple files unless explicitly requested using @filename.
+- DO NOT perform automatic codebase search (No hidden background semantic searches).
+- Keep responses concise and focused ONLY on the requested code snippet.
+- Minimize token usage to prevent API Rate Limits.

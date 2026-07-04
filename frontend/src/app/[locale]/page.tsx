@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import HeroSection from '@/components/sections/HeroSection'
@@ -6,24 +9,17 @@ import BookingSection from '@/components/sections/BookingSection'
 import JobsPreview from '@/components/sections/JobsPreview'
 import ToolsPreview from '@/components/sections/ToolsPreview'
 import BlogPreview from '@/components/sections/BlogPreview'
+import api from '@/lib/api'
 import type { Profile } from '@/lib/types'
 
-async function getProfile(): Promise<Profile | null> {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/profile`,
-      { next: { revalidate: 60 } }
-    )
-    const data = await res.json()
-    return data.profile ?? null
-  } catch {
-    return null
-  }
-}
+export default function HomePage() {
+  const [profile, setProfile] = useState<Profile | null>(null)
 
-export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params
-  const profile = await getProfile()
+  useEffect(() => {
+    api.get<{ profile: Profile }>('/profile')
+      .then(res => setProfile(res.profile))
+      .catch(() => setProfile(null))
+  }, [])
 
   return (
     <>

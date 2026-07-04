@@ -550,3 +550,46 @@ html[dir='rtl'] body { direction: rtl; text-align: right; }
   margin: 1.5rem 0;
 }
 .prose-content pre code { background: none; color: inherit; padding: 0; }
+
+/* ════════════════════════════════════
+   IDENTITY HELPERS – used by admin + public pages
+════════════════════════════════════ */
+
+/* Glass card */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(253, 147, 195, 0.18);
+}
+
+/* Gradient text – rose to rose-dark */
+.text-gradient {
+  background: linear-gradient(135deg, #FD93C3 0%, #E8609A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero dark background */
+.bg-gradient-hero {
+  background: linear-gradient(160deg, #0F0A14 0%, #2A1040 55%, #3D1060 100%);
+}
+
+/* Rose gradient button/background */
+.bg-gradient-rose {
+  background: linear-gradient(135deg, #FD93C3 0%, #E8609A 100%);
+}
+
+/* Glass shadow */
+.shadow-glass {
+  box-shadow: 0 8px 32px rgba(15, 10, 20, 0.08), 0 1px 0 rgba(255,255,255,0.6) inset;
+}
+
+/* Rose shadow aliases */
+.shadow-rose    { box-shadow: 0 8px 24px rgba(253,147,195,0.4); }
+.shadow-rose-lg { box-shadow: 0 16px 48px rgba(253,147,195,0.5); }
+
+/* Font family aliases */
+.font-heading { font-family: 'Edu QLD Beginner', cursive; }
+.font-display { font-family: 'Boldonse', cursive; }

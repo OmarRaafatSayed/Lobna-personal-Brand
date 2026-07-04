@@ -35,6 +35,21 @@ export const api = {
     request<T>(endpoint, { method: 'PATCH', body: JSON.stringify(body) }),
   delete: <T>(endpoint: string) =>
     request<T>(endpoint, { method: 'DELETE' }),
+  /** Upload a file — returns { success, url } */
+  upload: async (file: File): Promise<{ success: boolean; url: string }> => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('lobna_token') : null
+    const form = new FormData()
+    form.append('file', file)
+    const url = `${API_URL}/upload`
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+      body: form,
+    })
+    const data = await res.json()
+    if (!res.ok) throw new Error(data.message || 'Upload failed')
+    return data
+  },
 };
 
 export default api;

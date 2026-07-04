@@ -79,7 +79,7 @@ export default function JobsPreview() {
             const badge = typeBadge[job.type] || { bg: '#f3f4f6', color: '#374151', border: '#d1d5db' }
             return (
               <motion.div
-                key={job._id}
+                key={job._id || `job-${i}`}
                 initial={{ opacity: 0, y: 32 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.1 }}
