@@ -10,8 +10,22 @@ const app = express()
 const prisma = require('./lib/prisma')
 
 // Middleware
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:3000',
+  'https://lobnaa-git-main-omar-raafats-projects.vercel.app',
+  'https://lobnaa-5m3vk2p4k-omar-raafats-projects.vercel.app',
+].filter(Boolean)
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true)
+    if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      return callback(null, true)
+    }
+    callback(new Error('Not allowed by CORS'))
+  },
   credentials: true,
 }))
 app.use(express.json({ limit: '10mb' }))

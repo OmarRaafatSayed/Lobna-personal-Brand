@@ -296,23 +296,56 @@ export default function BookingSection() {
                 {/* Platform — always 2 cols (buttons are compact enough) */}
                 <div className="platform-grid">
                   {[
-                    { v: 'google_meet', l: '🟢 Google Meet' },
-                    { v: 'zoom',        l: '🔵 Zoom' },
-                  ].map(p => (
-                    <button key={p.v} type="button"
-                      onClick={() => setForm(f => ({ ...f, platform: p.v }))}
-                      style={{
-                        padding: '0.75rem 0.75rem', borderRadius: 12,
-                        fontFamily: FB, fontWeight: 500,
-                        fontSize: 'clamp(0.8rem, 2vw, 0.875rem)',
-                        cursor: 'pointer', transition: 'all 0.2s',
-                        ...(form.platform === p.v
-                          ? { border: '1px solid #FD93C3', background: 'rgba(253,147,195,0.12)', color: '#FD93C3' }
-                          : { border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.5)' }),
-                      }}>
-                      {p.l}
-                    </button>
-                  ))}
+                    {
+                      v: 'google_meet',
+                      label: 'Google Meet',
+                      icon: (
+                        <svg width="20" height="20" viewBox="0 0 48 48" fill="none">
+                          <path d="M29 24c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z" fill="#00AC47"/>
+                          <path d="M34 14H14c-2.21 0-4 1.79-4 4v12c0 2.21 1.79 4 4 4h20c2.21 0 4-1.79 4-4V18c0-2.21-1.79-4-4-4z" fill="#00AC47" fillOpacity="0.15"/>
+                          <path d="M38 19.5l-6 4.5 6 4.5V19.5z" fill="#00AC47"/>
+                          <rect x="10" y="14" width="24" height="20" rx="4" stroke="#00AC47" strokeWidth="2" fill="none"/>
+                          <path d="M38 20v8l-6-4 6-4z" fill="#00AC47"/>
+                        </svg>
+                      ),
+                    },
+                    {
+                      v: 'zoom',
+                      label: 'Zoom',
+                      icon: (
+                        <svg width="20" height="20" viewBox="0 0 48 48" fill="none">
+                          <rect x="4" y="12" width="28" height="24" rx="4" fill="#2D8CFF"/>
+                          <path d="M32 20l10-6v20l-10-6V20z" fill="#2D8CFF"/>
+                          <path d="M10 20h16v8H10z" fill="#fff" fillOpacity="0.9" rx="2"/>
+                        </svg>
+                      ),
+                    },
+                  ].map(p => {
+                    const active = form.platform === p.v
+                    return (
+                      <button key={p.v} type="button"
+                        onClick={() => setForm(f => ({ ...f, platform: p.v }))}
+                        style={{
+                          padding: '0.75rem 1rem',
+                          borderRadius: 12,
+                          fontFamily: FB,
+                          fontWeight: 600,
+                          fontSize: '0.875rem',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          justifyContent: 'center',
+                          ...(active
+                            ? { border: '1.5px solid #FD93C3', background: 'rgba(253,147,195,0.12)', color: '#FD93C3' }
+                            : { border: '1px solid rgba(255,255,255,0.12)', background: 'transparent', color: 'rgba(255,255,255,0.5)' }),
+                        }}>
+                        {p.icon}
+                        {p.label}
+                      </button>
+                    )
+                  })}
                 </div>
 
                 <button onClick={() => validate() && setStep(2)} className="btn-primary"
