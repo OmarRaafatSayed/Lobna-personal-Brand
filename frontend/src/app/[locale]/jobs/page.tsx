@@ -1,5 +1,7 @@
 'use client'
 
+export const dynamic = 'force-dynamic'
+
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from '@/components/layout/Navbar'
@@ -138,7 +140,8 @@ export default function JobsPage() {
             transition={{ duration: 0.5 }}
             style={{
               display: 'flex',
-              flexDirection: window.innerWidth < 640 ? 'column' : 'row',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
               gap: '1rem',
               marginBottom: 'clamp(2rem, 4vw, 3rem)',
             }}>

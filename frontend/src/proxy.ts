@@ -9,6 +9,14 @@ export function proxy(request: NextRequest) {
   // Skip admin routes — they are locale-independent
   if (pathname.startsWith('/admin')) return NextResponse.next()
 
+  // Skip static/api/next internals
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/uploads') ||
+    pathname.includes('.')
+  ) return NextResponse.next()
+
   // Check if pathname already has a locale
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`

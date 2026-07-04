@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { Clock, ArrowRight, Tag } from 'lucide-react'
 import type { BlogPost } from '@/lib/types'
 
+export const dynamic = 'force-dynamic'
+
 async function getPost(slug: string): Promise<BlogPost | null> {
   try {
     const res = await fetch(
