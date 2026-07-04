@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { Globe } from 'lucide-react'
+import BottomNav from './BottomNav'
 
 export default function Navbar() {
   const { locale, setLocale, t, dir } = useLanguage()
@@ -296,6 +297,9 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Mobile Bottom Navigation */}
+      <BottomNav />
     </>
   )
 }

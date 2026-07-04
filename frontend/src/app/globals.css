@@ -593,3 +593,18 @@ html[dir='rtl'] body { direction: rtl; text-align: right; }
 /* Font family aliases */
 .font-heading { font-family: 'Edu QLD Beginner', cursive; }
 .font-display { font-family: 'Boldonse', cursive; }
+
+/* ── Mobile Bottom Navigation ── */
+.mobile-bottom-nav { display: none !important; }
+
+@media (max-width: 767px) {
+  .mobile-bottom-nav { display: flex !important; }
+
+  /* Add padding to page bottom so content isn't hidden behind the nav */
+  main {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+
+  /* Hide the old hamburger mobile menu on pages that have bottom nav */
+  .mobile-hamburger { display: none !important; }
+}
