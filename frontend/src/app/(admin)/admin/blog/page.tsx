@@ -25,7 +25,7 @@ export default function AdminBlogPage() {
 
   useEffect(() => {
     setLoading(true)
-    api.get<{ posts: BlogPost[] }>('/blog/all').then(r => setPosts(r.posts)).catch(() => {}).finally(() => setLoading(false))
+    api.get<{ posts: BlogPost[] }>('/blog?all=true').then(r => setPosts(r.posts)).catch(() => {}).finally(() => setLoading(false))
   }, [])
 
   const openNew  = () => { setEditPost(EMPTY_POST); setTagInput(''); setShowForm(true) }

@@ -29,7 +29,7 @@ export default function AdminJobsPage() {
 
   const fetchJobs = async () => {
     setLoading(true)
-    try { const res = await api.get<{ jobs: Job[] }>('/jobs/all'); setJobs(res.jobs) }
+    try { const res = await api.get<{ jobs: Job[] }>('/jobs?all=true'); setJobs(res.jobs) }
     catch {} finally { setLoading(false) }
   }
   useEffect(() => { fetchJobs() }, [])

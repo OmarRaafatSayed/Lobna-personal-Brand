@@ -32,8 +32,8 @@ export default function AdminDashboard() {
   useEffect(() => {
     Promise.all([
       api.get<{ bookings: Booking[]; total: number }>('/bookings?limit=5'),
-      api.get<{ jobs: unknown[] }>('/jobs/all'),
-      api.get<{ posts: unknown[] }>('/blog/all'),
+      api.get<{ jobs: unknown[] }>('/jobs?all=true'),
+      api.get<{ posts: unknown[] }>('/blog?all=true'),
     ]).then(([bRes, jRes, pRes]) => {
       setBookings(bRes.bookings)
       setStats({

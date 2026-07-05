@@ -26,7 +26,7 @@ export default function AdminToolsPage() {
 
   useEffect(() => {
     setLoading(true)
-    api.get<{ tools: Tool[] }>('/tools/all').then(r => setTools(r.tools)).catch(() => {}).finally(() => setLoading(false))
+    api.get<{ tools: Tool[] }>('/tools?all=true').then(r => setTools(r.tools)).catch(() => {}).finally(() => setLoading(false))
   }, [])
 
   const openNew  = () => { setEditTool(EMPTY_TOOL); setShowForm(true) }
