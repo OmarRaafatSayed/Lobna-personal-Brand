@@ -11,6 +11,7 @@ import api from '@/lib/api'
 import type { Tool } from '@/lib/types'
 import { TOOL_CATEGORY_LABELS_AR, TOOL_CATEGORY_LABELS_EN } from '@/lib/constants'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ToolIcon, { categoryBg } from '@/components/sections/ToolIcon'
 
 /* ─── Typography ─── */
 const FD = 'Boldonse, cursive'
@@ -210,18 +211,13 @@ export default function ToolsPage() {
                   {/* Icon + Title */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
                     <div style={{
-                      width: 56,
-                      height: 56,
-                      borderRadius: 14,
-                      background: 'linear-gradient(135deg, #FD93C3, #E8609A)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '1.75rem',
-                      boxShadow: '0 8px 24px rgba(253,147,195,0.4)',
+                      width: 56, height: 56, borderRadius: 14,
+                      background: categoryBg[tool.category]?.bg || 'rgba(253,147,195,0.1)',
+                      border: `1.5px solid ${categoryBg[tool.category]?.border || 'rgba(253,147,195,0.2)'}`,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
                       flexShrink: 0,
                     }}>
-                      {tool.icon || <Zap style={{ color: '#fff' }} size={26} />}
+                      <ToolIcon name={tool.name} category={tool.category} size={28} />
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <h2 style={{
